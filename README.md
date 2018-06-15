@@ -1,27 +1,32 @@
-# VsCodeFirebase
+# ng6-firebase-online-editor
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
+## This project is a basic setup for your angular 6 application with
 
-## Development server
+### firebase
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### firestore
 
-## Code scaffolding
+### TSLint Rule Setup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### RxJx Management
 
-## Build
+[Demo](https://vs-code-a3d2b.firebaseapp.com/#/editor)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Installation & setup
 
-## Running unit tests
+1.  run npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2.  create a file into environment folder with name firebase.config.ts
 
-## Running end-to-end tests
+3.  paste your firebase project config here eg.
+    export const firebaseConfig = {
+    apiKey: 'xxxxxxxxxxxxxxxxxxxxxx',
+    authDomain: 'xxxxxxxxxxxxxxxxxxxxxxxxxx',
+    databaseURL: 'xxxxxxxxxxxxxxxxx',
+    projectId: 'xxxxxxxxxxxxx',
+    storageBucket: 'xxxxxxxxxxxxxxxxx',
+    messagingSenderId: 'xxxxxxxxxxxx',
+    };
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+4.  run the command npm start
+5.  enable login via google & facebook in your firebase account

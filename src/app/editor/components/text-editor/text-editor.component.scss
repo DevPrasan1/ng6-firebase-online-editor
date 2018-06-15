@@ -1,0 +1,28 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.text {
+  width: 100%;
+}
+.popup {
+  position: absolute;
+  z-index: 9;
+  background-color: #1c2022;
+  width: 100px;
+  height: 30px;
+  top: 30px;
+  right: 30px;
+  text-align: center;
+  line-height: 2;
+  transition: 1s;
+  border-radius: 10px;
+  box-shadow: 2px 3px snow;
+  color: white;
+  border: solid white 1px;
+}

@@ -1,0 +1,78 @@
+:host {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  .header {
+    line-height: 1.5;
+    height: 20px;
+    padding: 1px 0px;
+    padding-left: 8px;
+    padding-right: 4px;
+    font-size: 12px;
+    //background-color: #2b2b2b;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    a {
+      width: calc(100% - 80px);
+      white-space: pre;
+      cursor: pointer;
+    }
+    i:hover {
+      transform: scale(1.2, 1.2);
+      font-weight: bolder;
+    }
+
+    .new {
+      width: 80px;
+      text-align: right;
+      opacity: 0;
+      a {
+        margin: 0 3px;
+      }
+    }
+    .new:hover {
+      opacity: 1;
+    }
+  }
+  .childern {
+    padding: 2px 0px;
+    padding-left: 10px;
+    margin: 0;
+  }
+  .loading {
+    min-height: 15px;
+    padding-top: 5px;
+    padding-left: 25px;
+    color: white;
+  }
+  .empty {
+    color: white;
+    font-size: 10px;
+    padding-left: 19px;
+  }
+  .active {
+    background-color: rgb(0, 84, 153);
+  }
+
+  form {
+    display: flex;
+    flex-direction: row;
+    input {
+      width: calc(100% - 15px);
+    }
+    span {
+      width: 15px;
+      text-align: center;
+      background-color: white;
+      color: #242527;
+      padding: 0px 3px;
+      margin-bottom: 0.5px;
+      margin-top: -0.5px;
+      cursor: pointer;
+    }
+  }
+}

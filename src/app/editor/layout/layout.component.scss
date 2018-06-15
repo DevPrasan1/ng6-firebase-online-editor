@@ -1,0 +1,47 @@
+:host {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.main {
+  height: calc(100vh - 8px);
+  display: grid;
+  grid-template-rows: 35px 1fr 20px;
+  grid-template-columns: 50px 200px 1fr;
+}
+
+/* toolbar : file related options*/
+
+.toolbar {
+  grid-row: 1;
+  grid-column: 1/4;
+}
+
+/* toolbar menus: first left sidebar*/
+
+.menus {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+/* directory : second left sidebar*/
+
+.directory {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+/* editor : text editor */
+
+.editor {
+  grid-row: 2;
+  grid-column: 3;
+}
+
+/* footer */
+
+.footer {
+  grid-row: 3;
+  grid-column: 1/4;
+}

@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "dist/vs-code-firebase",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

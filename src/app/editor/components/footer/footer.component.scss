@@ -1,0 +1,30 @@
+:host {
+  background-color: #1c2022;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 4px 10px;
+  font-size: 14px;
+  color: white;
+  background-color: #1c2022;
+  justify-content: space-between;
+  .section {
+    color: white;
+    padding: 1px;
+    text-align: center;
+    a {
+      cursor: pointer;
+      color: white;
+    }
+    i {
+      padding: 2px 7px;
+      font-size: 11px;
+    }
+    margin-top: 2px;
+  }
+}

@@ -1,0 +1,43 @@
+:host {
+  background-color: #1c2022;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.wrapper {
+  padding: 4px 0px;
+  padding-right: 10px;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  background-color: #1c2022;
+  justify-content: space-between;
+  .section {
+    color: white;
+    padding: 1px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    line-height: 1;
+    a {
+      cursor: pointer;
+    }
+    i {
+      padding: 2px 7px;
+      font-size: 11px;
+    }
+  }
+}
+
+.toolbar-menu {
+  padding: 2px 10px;
+  border: 0px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.toolbar-menu:hover {
+  transform: scale(1.2, 1.2);
+}

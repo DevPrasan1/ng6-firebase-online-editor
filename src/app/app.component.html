@@ -1,92 +1,9 @@
-<div class="main">
-  <div class="toolbar">
-    <div class="toolbar-menu">File</div>
-    <div class="toolbar-menu">Edit</div>
-    <div class="toolbar-menu">Selection</div>
-    <div class="toolbar-menu">View</div>
-    <div class="toolbar-menu">Go</div>
-    <div class="toolbar-menu">Tasks</div>
-    <div class="toolbar-menu">Help</div>
-  </div>
-  <div class="menus">
-    <div class="section b-0">
-      <div class="icon">
-        <i class="far fa-copy"></i>
-      </div>
-      <div class="icon">
-        <i class="fas fa-search"></i>
-      </div>
-      <div class="icon">
-        <i class="fas fa-code-branch"></i>
-      </div>
+<div class="loader" *ngIf="loading">
+    <div class="container">
+        <div class="item item-1"></div>
+        <div class="item item-2"></div>
+        <div class="item item-3"></div>
+        <div class="item item-4"></div>
     </div>
-    <div class="section b-0">
-      <div class="icon">
-        <i class="fas fa-cog"></i>
-      </div>
-    </div>
-
-  </div>
-  <div class="directory">
-    <div class="header explorer">EXPLORER</div>
-    <div class="header open-editor">
-      <i class="fas fa-caret-right"></i> OPEN EDITOR</div>
-    <div class="header grid">
-      <i class="fas fa-caret-right"></i> GRID</div>
-  </div>
-  <div class="editor">
-
-    <div class="text" id="editor">
-
-    </div>
-
-  </div>
-  <div class="footer">
-    <i class="fas fa-times"></i> 0
-    <i class="fas fa-exclamation-triangle"></i> 0
-    <i class="fas fa-user"></i> Dev
-  </div>
 </div>
-
-<script>
-  const data = `var bisector = function(compare) {
-if (compare.length === 1) compare = ascendingComparator(compare);
-return {
-left: function(a, x, lo, hi) {
-if (lo == null) lo = 0;
-if (hi == null) hi = a.length;
-while (lo < hi) {
-  var mid = lo + hi >>> 1;
-  if (compare(a[mid], x) < 0) lo = mid + 1;
-  else hi = mid;
-}
-return lo;
-},
-right: function(a, x, lo, hi) {
-if (lo == null) lo = 0;
-if (hi == null) hi = a.length;
-while (lo < hi) {
-  var mid = lo + hi >>> 1;
-  if (compare(a[mid], x) > 0) hi = mid;
-  else lo = mid + 1;
-}
-return lo;
-}
-};
-};
-`;
-  // const textArea = document.getElementById('editor');
-  // textArea.value = data;
-
-  var editor = ace.edit("editor");
-  editor.setTheme("ace/theme/twilight");
-  editor.session.setMode("ace/mode/javascript");
-  editor.session.setTabSize(4);
-  document.getElementById('editor').style.fontSize = '16px';
-  editor.setShowPrintMargin(false);
-  editor.insert(data);
-  editor.session.on('change', function (delta) {
-    // console.log(delta);
-
-  });
-</script>
+<router-outlet></router-outlet>

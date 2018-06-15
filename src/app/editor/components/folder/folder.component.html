@@ -1,0 +1,47 @@
+<div class="header grid" *ngIf="folder" [ngClass]="{'active' : selectedFile && selectedFile.name===folder.name }">
+  <a *ngIf="folder.type==='FOLDER'" (click)="onClick()">
+    <i class="fas  {{showChildern ? 'fa-caret-down' : 'fa-caret-right'}}"></i>
+    {{folder.name}}
+  </a>
+  <a (click)="open(folder)" *ngIf="folder.type==='FILE'">
+    <i class="far fa-file"></i> {{folder.name}}
+  </a>
+  <div class="new" *ngIf="folder.type==='FOLDER'">
+    <a (click)="addFile()">
+      <i class="fas fa-file-medical"></i>
+    </a>
+    <a (click)="addFolder()">
+      <i class="fas fa-folder-open">
+      </i>
+    </a>
+    <a (click)="delete()" *ngIf="folder.parent!=='ROOT'">
+      <i class="fas fa-times">
+      </i>
+    </a>
+  </div>
+
+  <div class="new" *ngIf="folder.type==='FILE'">
+    <a (click)="delete()">
+      <i class="fas fa-times">
+      </i>
+    </a>
+  </div>
+</div>
+<div [hidden]="!showInput" class="childern">
+  <form class="header grid" #fileForm="ngForm" (ngSubmit)="onSubmit(fileForm)">
+    <input type="text" autocomplete="false" ngModel name="fileName" (focusout)="toogleInput()" autofocus/>
+    <span (click)="hideInput()">
+      <i class="fas fa-times">
+      </i>
+    </span>
+  </form>
+</div>
+<div *ngIf="childernLoading" class="childern loading">
+  <i class="fas fa-spinner fa-spin"></i>
+</div>
+<div class="childern" [hidden]="!(showChildern && childern.length>0)">
+  <app-folder *ngFor="let f of childern" [folder]="f" (openFile)="open($event)" [selectedFile]="selectedFile"></app-folder>
+</div>
+<div class="childern empty" *ngIf="!childernLoading && showChildern && childern.length==0">
+  No files
+</div>

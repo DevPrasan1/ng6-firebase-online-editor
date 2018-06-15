@@ -1,0 +1,6 @@
+<div class="header explorer">EXPLORER</div>
+<div class="header open-editor">
+  <i class="fas fa-caret-right"></i>
+  OPEN EDITOR
+</div>
+<app-folder *ngIf="rootFolder" [folder]="rootFolder" [selectedFile]="selectedFile" (openFile)="open($event)"></app-folder>
