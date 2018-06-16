@@ -20,6 +20,9 @@
       width: calc(100% - 80px);
       white-space: pre;
       cursor: pointer;
+      .blue {
+        color: #3498db;
+      }
     }
     i:hover {
       transform: scale(1.2, 1.2);

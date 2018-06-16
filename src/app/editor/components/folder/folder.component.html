@@ -1,10 +1,13 @@
-<div class="header grid" *ngIf="folder" [ngClass]="{'active' : selectedFile && selectedFile.name===folder.name }">
+<div class="header grid" *ngIf="folder" [ngClass]="{'active' : selectedFile && selectedFile.id===folder.id }">
   <a *ngIf="folder.type==='FOLDER'" (click)="onClick()">
-    <i class="fas  {{showChildern ? 'fa-caret-down' : 'fa-caret-right'}}"></i>
-    {{folder.name}}
+    <span>
+      <i class="fas {{showChildern ? 'fa-folder-open' : 'fa-folder'}} blue"></i>
+      {{' '+ folder.name}}
+      <!-- <i class="fas  {{showChildern ? 'fa-caret-down' : 'fa-caret-right'}}"></i> -->
+    </span>
   </a>
   <a (click)="open(folder)" *ngIf="folder.type==='FILE'">
-    <i class="far fa-file"></i> {{folder.name}}
+    <i class="far fa-file"></i> {{' '+ folder.name}}
   </a>
   <div class="new" *ngIf="folder.type==='FOLDER'">
     <a (click)="addFile()">
@@ -14,6 +17,9 @@
       <i class="fas fa-folder-open">
       </i>
     </a>
+    <a (click)="renameFile()" *ngIf="folder.parent!=='ROOT'">
+      <i class="far fa-edit"></i>
+    </a>
     <a (click)="delete()" *ngIf="folder.parent!=='ROOT'">
       <i class="fas fa-times">
       </i>
@@ -21,6 +27,9 @@
   </div>
 
   <div class="new" *ngIf="folder.type==='FILE'">
+    <a (click)="renameFile()">
+      <i class="far fa-edit"></i>
+    </a>
     <a (click)="delete()">
       <i class="fas fa-times">
       </i>
@@ -29,7 +38,7 @@
 </div>
 <div [hidden]="!showInput" class="childern">
   <form class="header grid" #fileForm="ngForm" (ngSubmit)="onSubmit(fileForm)">
-    <input type="text" autocomplete="false" ngModel name="fileName" (focusout)="toogleInput()" autofocus/>
+    <input type="text" autocomplete="false" ngModel name="fileName" [(ngModel)]="fileName" (focusout)="toogleInput()" autofocus/>
     <span (click)="hideInput()">
       <i class="fas fa-times">
       </i>

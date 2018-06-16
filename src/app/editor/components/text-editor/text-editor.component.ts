@@ -15,9 +15,11 @@ const extensions = {
 })
 export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() selectedFile;
+  @Input() theme = 'ace/theme/dracula';
   editor = null;
   interval = null;
   showPopup = false;
+  oldFileName = '';
   constructor(private _filesService: FilesService) {}
 
   ngOnInit() {
@@ -35,8 +37,12 @@ export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, On
     });
   }
   saveFile(file = this.selectedFile) {
+    const beautify = ace.require('ace/ext/beautify'); // get reference to extension
+    beautify.beautify(this.editor.session);
+
     if (file && file.content !== this.editor.getValue()) {
       const content = this.editor.getValue();
+      this.oldFileName = file.name;
       this.showPopUp();
       this._filesService
         .updateFile(file.id, {
@@ -49,9 +55,9 @@ export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, On
     }
   }
   autoSave() {
-    this.interval = setInterval(() => {
-      this.saveFile();
-    }, 3000);
+    // this.interval = setInterval(() => {
+    //   this.saveFile();
+    // }, 3000);
   }
   showPopUp() {
     this.showPopup = true;
@@ -61,7 +67,7 @@ export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, On
   }
   ngOnChanges(changes: SimpleChanges) {
     this.editor = ace.edit('editor');
-    this.editor.setTheme('ace/theme/twilight');
+    this.editor.setTheme(this.theme);
     this.editor.session.setTabSize(4);
     const selectedFileChange = changes['selectedFile'];
     if (selectedFileChange) {
@@ -77,6 +83,9 @@ export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, On
       this.editor.setValue(data);
       this.editor.gotoLine(1);
     }
+    this.editor.setOptions({
+      enableBasicAutocompletion: true,
+    });
   }
   ngOnDestroy() {
     this.saveFile();

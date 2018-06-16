@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FilesService, AuthService, LoaderService } from '../../common';
 
@@ -13,6 +13,8 @@ export class LayoutComponent implements OnInit {
   selectedFile = null;
   loading = true;
   currentUser = null;
+  showDirectory = true;
+  theme = 'ace/theme/dracula';
   constructor(
     private _filesService: FilesService,
     private _authService: AuthService,
@@ -25,13 +27,19 @@ export class LayoutComponent implements OnInit {
   logout() {
     this._authService.logout();
   }
+  changeTheme(theme) {
+    this.theme = theme;
+  }
+  toggleDirectory() {
+    this.showDirectory = !this.showDirectory;
+  }
   getUser() {
     const interval = setInterval(() => {
       this.currentUser = this._authService.getUserDetails();
       if (this.currentUser) {
         this.rootFolder = {
           id: this.currentUser.uid,
-          name: this.currentUser.displayName,
+          name: 'Documents', //this.currentUser.displayName
           type: 'FOLDER',
           parent: 'ROOT',
         };

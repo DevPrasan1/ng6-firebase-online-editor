@@ -15,6 +15,27 @@ export class FilesService {
       .doc(uid)
       .collection('files', ref => ref.where('parent', '==', parent));
   }
+  isFileAlreadyExistWithSameName(parent, fileName, fileType) {
+    const uid = this._auth.auth.currentUser.uid;
+    return this._afs
+      .collection('users')
+      .doc(uid)
+      .collection('files', ref =>
+        ref
+          .where('parent', '==', parent)
+          .where('name', '==', fileName)
+          .where('type', '==', fileType),
+      );
+  }
+  updateFileName(fileId, fileName) {
+    const uid = this._auth.auth.currentUser.uid;
+    return this._afs
+      .collection('users')
+      .doc(uid)
+      .collection('files')
+      .doc(fileId)
+      .update({ name: fileName });
+  }
   addNew(folder) {
     const uid = this._auth.auth.currentUser.uid;
     if (folder.type === 'FILE') {

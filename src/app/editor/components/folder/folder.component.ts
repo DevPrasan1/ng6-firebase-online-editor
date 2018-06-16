@@ -12,13 +12,16 @@ export class FolderComponent implements OnInit, OnDestroy {
   @Input() folder;
   @Input() selectedFile;
   @Output() openFile = new EventEmitter<any>();
+  fileName = '';
   childern: any = [];
   showChildern = false;
   showInput = false;
-  newFileType = null;
+  newFileType: string = null;
   isChildernSubscribed = false;
   loading = false;
   childernLoading = false;
+  hasRenameSelected = false;
+
   constructor(private _filesService: FilesService) {}
   onClick() {
     this.showChildern = !this.showChildern;
@@ -29,24 +32,61 @@ export class FolderComponent implements OnInit, OnDestroy {
   open(folder) {
     this.openFile.emit(folder);
   }
+  isFileAlreadyExist(fileName, cb) {
+    const sub: Subscription = this._filesService
+      .isFileAlreadyExistWithSameName(this.folder.id, fileName, this.newFileType)
+      .valueChanges()
+      .subscribe(data => {
+        if (data && data.length > 0) {
+          alert(`Same ${this.newFileType.toLowerCase()} already exist`);
+        } else {
+          cb();
+        }
+        sub.unsubscribe();
+      });
+  }
+  addNewFileToDb(fileName, form) {
+    this.isFileAlreadyExist(fileName, () => {
+      this.loading = true;
+      this._filesService
+        .addNew({
+          name: fileName,
+          type: this.newFileType,
+          parent: this.folder.id,
+        })
+        .then(() => {
+          this.loading = false;
+          if (!this.showChildern) {
+            this.fetchChildern();
+          }
+        });
+      form.reset();
+      this.showInput = false;
+    });
+  }
+  updateFileName(fileName, form) {
+    this._filesService.updateFileName(this.folder.id, fileName).then(() => {
+      form.reset();
+      this.loading = false;
+      this.showInput = false;
+      this.hasRenameSelected = false;
+      this.newFileType = '';
+    });
+  }
   onSubmit(form) {
-    if (form.value.fileName) {
+    let fileName = form.value.fileName.trim();
+    if (this.newFileType === 'FILE') {
+      fileName = fileName.replace(' ', '');
+    } else {
+      fileName = fileName.replace('  ', ' ');
+    }
+    if (fileName) {
       if (!this.loading) {
-        this.loading = true;
-        this._filesService
-          .addNew({
-            name: form.value.fileName,
-            type: this.newFileType,
-            parent: this.folder.id,
-          })
-          .then(() => {
-            this.loading = false;
-            if (!this.showChildern) {
-              this.fetchChildern();
-            }
-          });
-        form.reset();
-        this.showInput = false;
+        if (this.hasRenameSelected) {
+          this.updateFileName(fileName, form);
+        } else {
+          this.addNewFileToDb(fileName, form);
+        }
       }
     }
   }
@@ -55,6 +95,8 @@ export class FolderComponent implements OnInit, OnDestroy {
   }
   hideInput() {
     this.showInput = false;
+    this.hasRenameSelected = false;
+    this.newFileType = '';
   }
   addFile() {
     this.newFileType = 'FILE';
@@ -62,6 +104,12 @@ export class FolderComponent implements OnInit, OnDestroy {
   }
   addFolder() {
     this.newFileType = 'FOLDER';
+    this.toogleInput();
+  }
+  renameFile() {
+    this.hasRenameSelected = true;
+    this.fileName = this.folder.name;
+    this.newFileType = this.folder.type;
     this.toogleInput();
   }
   delete() {

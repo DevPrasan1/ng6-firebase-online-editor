@@ -14,11 +14,11 @@
 
 ## Installation & setup
 
-1.  run npm install
+1.  `run npm install`
 
-2.  create a file into environment folder with name firebase.config.ts
+2.  `create a file into environment folder with name firebase.config.ts`
 
-3.  paste your firebase project config here eg.
+3.  ````paste your firebase project config here eg.
     export const firebaseConfig = {
     apiKey: 'xxxxxxxxxxxxxxxxxxxxxx',
     authDomain: 'xxxxxxxxxxxxxxxxxxxxxxxxxx',
@@ -26,7 +26,8 @@
     projectId: 'xxxxxxxxxxxxx',
     storageBucket: 'xxxxxxxxxxxxxxxxx',
     messagingSenderId: 'xxxxxxxxxxxx',
-    };
+    };```
+    ````
 
-4.  run the command npm start
+4.  `run the command npm start`
 5.  enable login via google & facebook in your firebase account

@@ -17,3 +17,18 @@ body {
 .ace_gutter {
   background-color: #1c2022 !important;
 }
+.ace_completion-highlight {
+  color: #ff79c6 !important;
+}
+.ace_line {
+  color: white !important;
+}
+.ace_line .ace_selected {
+  background-color: #24282a !important;
+}
+.ace_active-line {
+  background: #24282a !important;
+}
+.ace_gutter-active-line {
+  background: #24282a !important;
+}

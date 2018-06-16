@@ -1,18 +1,22 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { aceEditorThemes } from '../../../ace-editor-themes';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   @Output() logout = new EventEmitter<void>();
+  @Output() onChangeTheme = new EventEmitter<string>();
+  themes = aceEditorThemes;
+  theme = 'ace/theme/dracula';
   constructor() {}
   signout() {
     this.logout.emit();
   }
-  ngOnInit() {
+  changeTheme() {
+    this.onChangeTheme.emit(this.theme);
   }
-
+  ngOnInit() {}
 }

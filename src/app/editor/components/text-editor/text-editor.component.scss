@@ -6,15 +6,17 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  background-color: #1c2022;
 }
 .text {
   width: 100%;
+  margin-top: 3px;
 }
 .popup {
   position: absolute;
   z-index: 9;
   background-color: #1c2022;
-  width: 100px;
+  width: 250px;
   height: 30px;
   top: 30px;
   right: 30px;
@@ -25,4 +27,7 @@
   box-shadow: 2px 3px snow;
   color: white;
   border: solid white 1px;
+  .blue {
+    color: #ea1fff;
+  }
 }

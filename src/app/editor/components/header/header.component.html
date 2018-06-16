@@ -7,6 +7,11 @@
         <div class="toolbar-menu">Go</div>
         <div class="toolbar-menu">Tasks</div>
         <div class="toolbar-menu">Help</div>
+        <div class="toolbar-menu">
+            <select class="theme" name="theme" [(ngModel)]="theme" (change)="changeTheme()">
+                <option *ngFor="let t of themes.dark" value="ace/theme/{{t}}">{{t.replace('_',' ').replace('_' ,' ')}} </option>
+            </select>
+        </div>
     </div>
     <div class="section">
         <a (click)="signout()">

@@ -14,6 +14,7 @@
   flex-direction: row;
   background-color: #1c2022;
   justify-content: space-between;
+  box-shadow: 30px 30px 144px 21px rgba(0, 0, 0, 0.5);
   .section {
     color: white;
     padding: 1px;
@@ -36,8 +37,18 @@
   border: 0px;
   font-size: 13px;
   cursor: pointer;
+  .theme {
+    background-color: #1c2022;
+    color: white;
+    width: 83px;
+    border: 0px;
+    text-transform: capitalize;
+  }
+  option {
+    text-transform: capitalize;
+  }
 }
 
 .toolbar-menu:hover {
-  transform: scale(1.2, 1.2);
+  transform: scale(1.05, 1.05);
 }
