@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <div class="section">
+    <a class="toolbar-menu" *ngFor="let folder of path" (click)="onSelectFolderFromPath.emit(folder)">{{folder.name}}</a>
+  </div>
+  <div class="section">
+  </div>
+</div>

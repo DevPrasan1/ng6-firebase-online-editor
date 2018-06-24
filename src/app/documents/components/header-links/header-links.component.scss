@@ -1,0 +1,52 @@
+:host {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.wrapper {
+  padding: 6px 0px;
+  padding-right: 10px;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 30px 30px 144px 21px rgba(0, 0, 0, 0.5);
+  .section {
+    color: white;
+    padding: 1px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    line-height: 1;
+    a {
+      cursor: pointer;
+    }
+    i {
+      padding: 2px 7px;
+      font-size: 11px;
+    }
+  }
+}
+
+.toolbar-menu {
+  padding: 2px 10px;
+  border: 0px;
+  font-size: 13px;
+  cursor: pointer;
+  .theme {
+    background-color: #1c2022;
+    color: white;
+    width: 83px;
+    border: 0px;
+    text-transform: capitalize;
+  }
+  option {
+    text-transform: capitalize;
+  }
+}
+
+.toolbar-menu:hover {
+  transform: scale(1.05, 1.05);
+}

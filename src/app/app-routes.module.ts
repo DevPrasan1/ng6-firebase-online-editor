@@ -6,26 +6,31 @@ const routes: Routes = [
   {
     path: 'editor',
     loadChildren: './editor/editor.module#EditorModule',
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'documents',
+    loadChildren: './documents/documents.module#DocumentsModule',
+    canActivate: [AuthGuardService]
   },
   {
     path: 'auth',
     canActivate: [AuthLoginGuardService],
-    loadChildren: './auth/auth.module#AuthModule',
+    loadChildren: './auth/auth.module#AuthModule'
   },
   {
     path: '',
     redirectTo: 'auth',
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: '',
-  },
+    redirectTo: 'auth'
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutesModule {}
