@@ -6,17 +6,17 @@ import { auth } from 'firebase/app';
 import { LoaderService } from '../loader/loader.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   constructor(
     private _router: Router,
     private _auth: AngularFireAuth,
     private _afs: AngularFirestore,
-    private _loaderService: LoaderService,
+    private _loaderService: LoaderService
   ) {}
   getUserDetails() {
-    return this._auth.auth.currentUser;
+    return JSON.parse(localStorage['fbUser']); //this._auth.auth.currentUser;
   }
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
@@ -34,6 +34,7 @@ export class AuthService {
       .then(credential => {
         this._loaderService.hide();
         this.updateUserInfo(credential.user, providerType);
+        localStorage.setItem('fbUser', JSON.stringify(credential.user));
       })
       .catch(err => {
         console.log(err);
@@ -50,16 +51,17 @@ export class AuthService {
         email: user.email,
         photoURL: user.photoURL,
         provider: providerType,
-        timestamp: new Date(),
+        timestamp: new Date()
       })
       .then(() => {
-        this._router.navigateByUrl('editor');
+        this._router.navigateByUrl('documents');
       });
   }
   logout() {
     this._auth.auth
       .signOut()
       .then(() => {
+        localStorage.setItem('fbUser', null);
         this._router.navigateByUrl('auth');
       })
       .catch(err => {

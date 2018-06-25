@@ -4,17 +4,13 @@ import { LayoutComponent } from './layout/layout.component';
 
 const routes = [
   {
-    path: ':folderId',
+    path: '',
     component: LayoutComponent,
   },
-  // {
-  //   path: '',
-  //   component: LayoutComponent,
-  // },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EditorRoutesModule {}
+export class DocumentsRoutesModule {}

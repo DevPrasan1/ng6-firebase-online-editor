@@ -9,6 +9,16 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'editor',
+    loadChildren: './editor/editor.module#EditorModule',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'documents',
+    loadChildren: './documents/documents.module#DocumentsModule',
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'auth',
     canActivate: [AuthLoginGuardService],
     loadChildren: './auth/auth.module#AuthModule',
@@ -20,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'auth',
   },
 ];
 

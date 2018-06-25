@@ -1,0 +1,41 @@
+:host {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  a:hover {
+    background-color: #165e80;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+    .section-head {
+      height: 26px;
+      a {
+        padding-left: 20px;
+      }
+    }
+    .section-body {
+      min-height: 200px;
+      a {
+        padding-left: 30px;
+      }
+    }
+    hr {
+      width: calc(100% - 1px);
+      margin: 0px;
+    }
+  }
+}

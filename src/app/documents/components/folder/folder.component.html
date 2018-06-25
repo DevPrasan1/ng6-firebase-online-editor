@@ -1,0 +1,18 @@
+<div (blur)="hide()" tabindex="1">
+  <a class="section" (dblclick)="open()" (contextmenu)="onRightClick($event)">
+    <span>
+      <!-- <i class="fas fa-4x {{folder.type==='FOLDER' ? 'fa-folder' : 'fa-file'}}"></i> -->
+      <img width="56px" src="/assets/images/{{folder.type==='FOLDER' ? 'folder' : 'file'}}.png" />
+    </span>
+    <p class="folder-name">{{folder.name}}</p>
+  </a>
+  <div class="popover__wrapper" [ngStyle]="{'top' :popoverPosition.top , 'left' : popoverPosition.left }">
+    <div class="push popover__content {{showPopover ? 'show' : ''}}">
+      <a (click)="open()" class="link">Open</a>
+      <a (click)="do()" class="link">Rename</a>
+      <a (click)="openInEditor.emit(folder)" class="link">Open in Editor</a>
+      <a (click)="do()" class="link">Add to Bookmark</a>
+
+    </div>
+  </div>
+</div>

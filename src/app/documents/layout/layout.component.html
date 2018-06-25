@@ -1,0 +1,16 @@
+<div class="main">
+  <div class="links">
+    <app-header-links></app-header-links>
+  </div>
+  <div class="user"></div>
+  <div class="header">
+    <app-header [path]="currentFolderPath" (onSelectFolderFromPath)="selectFolderFromPath($event)"></app-header>
+  </div>
+  <div class="sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="folders" (contextmenu)="onRightClick($event)" (click)="hide()" (blur)="hide()" tabindex="1">
+    <app-all-folders *ngIf="rootFolder" [folder]="rootFolder" (onSelectFolder)="setCurrentFolderPath($event)"></app-all-folders>
+  </div>
+  <div class="footer"></div>
+</div>
