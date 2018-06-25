@@ -4,9 +4,13 @@ import { LayoutComponent } from './layout/layout.component';
 
 const routes = [
   {
-    path: '',
+    path: ':folderId',
     component: LayoutComponent,
   },
+  // {
+  //   path: '',
+  //   component: LayoutComponent,
+  // },
 ];
 
 @NgModule({

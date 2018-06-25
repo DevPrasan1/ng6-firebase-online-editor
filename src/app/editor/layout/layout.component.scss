@@ -9,10 +9,13 @@
   display: grid;
   grid-template-rows: 35px 1fr 20px;
   grid-template-columns: 50px 200px 1fr;
-  transition: all 2s;
+  transition: all 1s;
 }
 .main-full {
   grid-template-columns: 50px 0px 1fr;
+  .editor {
+    border-left: none;
+  }
 }
 
 /* toolbar : file related options*/
@@ -20,6 +23,7 @@
 .toolbar {
   grid-row: 1;
   grid-column: 1/4;
+  border-bottom: solid black 1px;
 }
 
 /* toolbar menus: first left sidebar*/
@@ -27,6 +31,7 @@
 .menus {
   grid-row: 2;
   grid-column: 1;
+  border-right: solid black 1px;
 }
 
 /* directory : second left sidebar*/
@@ -64,15 +69,13 @@
 .editor {
   grid-row: 2;
   grid-column: 3;
-}
-.editor-full {
-  grid-row: 2;
-  grid-column: 2/4 !important;
+  border-left: solid black 1px;
 }
 
 /* footer */
 
 .footer {
   grid-row: 3;
+  border-top: solid black 1px;
   grid-column: 1/4;
 }

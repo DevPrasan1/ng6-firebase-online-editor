@@ -13,7 +13,7 @@ export class AuthGuardService implements CanActivate {
   canActivate(): any {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (JSON.parse(localStorage['fbUser'])) {
+        if (localStorage['fbUser'] && JSON.parse(localStorage['fbUser'])) {
           resolve(true);
         } else {
           this._router.navigate(['auth']);
@@ -32,7 +32,7 @@ export class AuthLoginGuardService implements CanActivate {
   canActivate(): any {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (!JSON.parse(localStorage['fbUser'])) {
+        if (!localStorage['fbUser'] ||  !JSON.parse(localStorage['fbUser'])) {
           resolve(true);
         } else {
           this._router.navigate(['documents']);

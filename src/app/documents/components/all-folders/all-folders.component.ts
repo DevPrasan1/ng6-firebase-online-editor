@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FilesService } from '../../../common';
+
 import { mockData } from '../../../ace-editor-themes';
 
 @Component({
   selector: 'app-all-folders',
   templateUrl: './all-folders.component.html',
-  styleUrls: ['./all-folders.component.scss']
+  styleUrls: ['./all-folders.component.scss'],
 })
 export class AllFoldersComponent implements OnInit, OnDestroy {
   _subscriptions = new Subscription();
@@ -22,21 +24,25 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
   loading = false;
   childernLoading = false;
   hasRenameSelected = false;
-  folders: any = []// mockData;
+  folders: any = []; // mockData;
   subscribedFoldersIds = [];
   currentFolder: any = {};
   showPopover = false;
   popoverPosition = {
     left: '-500px',
-    top: '-500px'
+    top: '-500px',
   };
-  constructor(private _filesService: FilesService) {}
+  constructor(private _router: Router, private _filesService: FilesService) {}
   openFolder(folder) {
     if (folder.type === 'FOLDER') {
       this.currentFolder = folder;
       this.onSelectFolder.emit(folder);
       this.fetchChildern();
     }
+  }
+  openInEditor(folder = this.currentFolder) {
+    console.log(folder);
+    this._router.navigateByUrl(`editor/${folder.id}`);
   }
   currentPathFolders() {
     return this.folders.filter(f => f.parent === this.currentFolder.id);
@@ -45,13 +51,13 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
     this.showPopover = false;
     this.popoverPosition = {
       left: '-500px',
-      top: '-500px'
+      top: '-500px',
     };
   }
   onRightClick(e) {
     this.popoverPosition = {
       top: e.clientY + 'px',
-      left: e.clientX + 'px'
+      left: e.clientX + 'px',
     };
     this.showPopover = true;
     e.stopPropagation();
@@ -77,7 +83,7 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
         .addNew({
           name: fileName,
           type: this.newFileType,
-          parent: this.folder.id
+          parent: this.folder.id,
         })
         .then(() => {
           this.loading = false;
@@ -170,7 +176,7 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
             if (action.type === 'added') {
               this.folders.push({
                 id: action.payload.doc.id,
-                ...action.payload.doc.data()
+                ...action.payload.doc.data(),
               });
             } else if (action.type === 'modified') {
               this.folders = this.folders.map(
@@ -178,9 +184,9 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
                   f.id === action.payload.doc.id
                     ? {
                         id: action.payload.doc.id,
-                        ...action.payload.doc.data()
+                        ...action.payload.doc.data(),
                       }
-                    : f
+                    : f,
               );
             } else if (action.type === 'removed') {
               this.folder = null;

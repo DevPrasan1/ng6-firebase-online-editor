@@ -3,7 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FilesService {
   constructor(private _auth: AngularFireAuth, private _afs: AngularFirestore) {}
@@ -15,6 +15,14 @@ export class FilesService {
       .doc(uid)
       .collection('files', ref => ref.where('parent', '==', parent));
   }
+  getFileById(fileId) {
+    const uid = this._auth.auth.currentUser.uid;
+    return this._afs
+      .collection('users')
+      .doc(uid)
+      .collection('files')
+      .doc(fileId);
+  }
   isFileAlreadyExistWithSameName(parent, fileName, fileType) {
     const uid = this._auth.auth.currentUser.uid;
     return this._afs
@@ -24,7 +32,7 @@ export class FilesService {
         ref
           .where('parent', '==', parent)
           .where('name', '==', fileName)
-          .where('type', '==', fileType)
+          .where('type', '==', fileType),
       );
   }
   updateFileName(fileId, fileName) {
@@ -57,7 +65,7 @@ export class FilesService {
         type: 'FILE',
         parent: parentFolderId,
         name: name,
-        content: ''
+        content: '',
       });
   }
   addFolder(parentFolderId, name) {
@@ -69,7 +77,7 @@ export class FilesService {
       .add({
         type: 'FOLDER',
         parent: parentFolderId,
-        name: name
+        name: name,
       });
   }
   updateFile(id, data) {

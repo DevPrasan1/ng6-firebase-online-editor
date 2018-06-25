@@ -6,13 +6,13 @@
     </span>
     <p class="folder-name">{{folder.name}}</p>
   </a> -->
-  <app-folder *ngFor="let f of currentPathFolders()" [folder]="f" (openFolder)="openFolder($event)"></app-folder>
+  <app-folder *ngFor="let f of currentPathFolders()" [folder]="f" (openFolder)="openFolder($event)" (openInEditor)="openInEditor($event)"></app-folder>
 </div>
 <div class="popover__wrapper" [ngStyle]="{'top' :popoverPosition.top , 'left' : popoverPosition.left }">
   <div class="push popover__content {{showPopover ? 'show' : ''}}">
     <a class="link">Create New Folder</a>
     <a class="link">Create New Document</a>
-    <a class="link">Open in Editor</a>
+    <a class="link" (click)="openInEditor()">Open in Editor</a>
     <a class="link">Share with</a>
   </div>
 </div>
