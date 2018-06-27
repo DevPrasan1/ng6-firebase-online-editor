@@ -63,18 +63,21 @@ export class LayoutComponent implements OnInit {
           .getFileById(folderId)
           .valueChanges()
           .subscribe((d: any) => {
-            this.currentUser = this._authService.getUserDetails();
-            this.rootFolder = {
-              id: folderId,
-              ...d,
-              parent: 'ROOT',
-            };
+            if (d) {
+              this.currentUser = this._authService.getUserDetails();
+              this.rootFolder = {
+                id: folderId,
+                ...d,
+                parent: 'ROOT',
+              };
+            } else {
+              this._router.navigateByUrl('documents');
+            }
           });
       } else {
-        this.getUser();
+        this._router.navigateByUrl('documents');
       }
     });
-    //this.getUser();
   }
   ngOnDestroy() {
     this._subscriptions.unsubscribe();

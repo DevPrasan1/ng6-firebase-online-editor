@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  box-shadow: 30px 30px 144px 21px rgba(0, 0, 0, 0.5);
+  // box-shadow: 30px 30px 144px 21px rgba(0, 0, 0, 0.5);
   .section {
     color: white;
     padding: 1px;
@@ -36,7 +36,6 @@
   font-size: 13px;
   cursor: pointer;
   .theme {
-    background-color: #1c2022;
     color: white;
     width: 83px;
     border: 0px;

@@ -9,7 +9,6 @@
   display: grid;
   grid-template-rows: 35px 1fr 20px;
   grid-template-columns: 50px 200px 1fr;
-  transition: all 1s;
 }
 .main-full {
   grid-template-columns: 50px 0px 1fr;
@@ -78,4 +77,23 @@
   grid-row: 3;
   border-top: solid black 1px;
   grid-column: 1/4;
+}
+@media only screen and (max-width: 800px) {
+  .main {
+    height: calc(100vh - 9px);
+    display: grid;
+    grid-template-rows: 35px 1fr 20px;
+    grid-template-columns: 50px 120px 1fr;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .main {
+    height: calc(100vh - 9px);
+    display: grid;
+    grid-template-rows: 35px 1fr 20px;
+    grid-template-columns: 50px 0px 1fr;
+  }
+  .directory {
+    display: none;
+  }
 }

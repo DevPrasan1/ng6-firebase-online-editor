@@ -47,18 +47,9 @@ export class AppComponent implements OnInit, OnDestroy {
       this.loading = false;
     }
   }
-  closeLoader() {
-    setInterval(() => {
-      this.loading = false;
-    }, 3000);
-  }
   ngOnInit() {
-    this._loaderService.hide();
     this.loadingSub = this._loaderService.loaderStatus.subscribe((val: boolean) => {
       this.loading = val;
-      // if (!this.loading) {
-      //   this.closeLoader();
-      // }
     });
   }
   ngOnDestroy() {

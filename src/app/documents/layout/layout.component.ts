@@ -110,15 +110,6 @@ export class LayoutComponent implements OnInit {
       });
   }
   getUser() {
-    //    parent: 'ZdQd13dl4qbAKkqLF08y1K9SMLF3'
-
-    // this.rootFolder = {
-    //   id: 'ZdQd13dl4qbAKkqLF08y1K9SMLF3',
-    //   name: 'Root', //this.currentUser.displayName
-    //   type: 'FOLDER',
-    //   parent: 'ROOT'
-    // };
-    // this._loaderService.hide();
     const interval = setInterval(() => {
       this.currentUser = this._authService.getUserDetails();
       if (this.currentUser) {
@@ -132,10 +123,11 @@ export class LayoutComponent implements OnInit {
         };
         this._loaderService.hide();
       }
-    }, 1000);
+    }, 3000);
   }
 
   ngOnInit() {
+    this._loaderService.show();
     this.getUser();
   }
   ngOnDestroy() {

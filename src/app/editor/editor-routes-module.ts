@@ -7,10 +7,10 @@ const routes = [
     path: ':folderId',
     component: LayoutComponent,
   },
-  // {
-  //   path: '',
-  //   component: LayoutComponent,
-  // },
+  {
+    path: '',
+    component: LayoutComponent,
+  },
 ];
 
 @NgModule({
