@@ -1,4 +1,4 @@
-<div class="header grid" *ngIf="folder" [ngClass]="{'active' : selectedFile && selectedFile.id===folder.id }">
+<div class="header grid" *ngIf="folder" [ngClass]="{'active' : selectedFile && selectedFile.id===folder.id }" [ngStyle]="{'padding-left.px' : paddingLeft}">
   <a *ngIf="folder.type==='FOLDER'" (click)="onClick()">
     <span>
       <i class="fas {{showChildern ? 'fa-folder-open' : 'fa-folder'}} blue"></i>
@@ -38,7 +38,8 @@
 </div>
 <div [hidden]="!showInput" class="childern">
   <form class="header grid" #fileForm="ngForm" (ngSubmit)="onSubmit(fileForm)">
-    <input type="text" autocomplete="false" ngModel name="fileName" [(ngModel)]="fileName" (focusout)="toogleInput()" autofocus/>
+    <input type="text" #textInput autocomplete="false" ngModel name="fileName" [(ngModel)]="fileName" (blur)="onSubmit(fileForm)"
+      autofocus/>
     <span (click)="hideInput()">
       <i class="fas fa-times">
       </i>
@@ -49,7 +50,7 @@
   <i class="fas fa-spinner fa-spin"></i>
 </div>
 <div class="childern" [hidden]="!(showChildern && childern.length>0)">
-  <app-folder *ngFor="let f of childern" [folder]="f" (openFile)="open($event)" [selectedFile]="selectedFile"></app-folder>
+  <app-folder *ngFor="let f of childern" [folder]="f" (openFile)="open($event)" [paddingLeft]="paddingLeft" [selectedFile]="selectedFile"></app-folder>
 </div>
 <div class="childern empty" *ngIf="!childernLoading && showChildern && childern.length==0">
   No files

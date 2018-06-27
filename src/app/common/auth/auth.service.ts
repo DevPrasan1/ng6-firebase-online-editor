@@ -39,7 +39,6 @@ export class AuthService {
       .catch(err => {
         console.log(err);
         this._loaderService.hide();
-        // alert(err.message);
       });
   }
   updateUserInfo(user, providerType) {
@@ -66,7 +65,6 @@ export class AuthService {
       })
       .catch(err => {
         this._loaderService.hide();
-        alert(err.message);
       });
   }
 }

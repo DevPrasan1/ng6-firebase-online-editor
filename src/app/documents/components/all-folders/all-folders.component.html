@@ -1,17 +1,11 @@
 <div class="wrapper">
-  <!-- <a class="section" *ngFor="let folder of currentPathFolders()" (dblclick)="openFolder(folder)">
-    <span>
-      <i class="fas fa-4x {{folder.type==='FOLDER' ? 'fa-folder' : 'fa-file'}}"></i>
-      <img width="56px" src="/assets/images/{{folder.type==='FOLDER' ? 'folder' : 'file'}}.png" />
-    </span>
-    <p class="folder-name">{{folder.name}}</p>
-  </a> -->
   <app-folder *ngFor="let f of currentPathFolders()" [folder]="f" (openFolder)="openFolder($event)" (openInEditor)="openInEditor($event)"></app-folder>
+  <app-folder *ngIf="newFileFolder.type" [folder]="newFileFolder" (addNew)="addNewFileToDb($event)"></app-folder>
 </div>
 <div class="popover__wrapper" [ngStyle]="{'top' :popoverPosition.top , 'left' : popoverPosition.left }">
   <div class="push popover__content {{showPopover ? 'show' : ''}}">
-    <a class="link">Create New Folder</a>
-    <a class="link">Create New Document</a>
+    <a class="link" (click)="addFolder()">Create New Folder</a>
+    <a class="link" (click)="addFile()">Create New Document</a>
     <a class="link" (click)="openInEditor()">Open in Editor</a>
     <a class="link">Share with</a>
   </div>

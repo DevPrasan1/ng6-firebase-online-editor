@@ -6,7 +6,7 @@ import { AllFoldersComponent } from '../components/all-folders/all-folders.compo
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
   private _subscriptions = new Subscription();
@@ -27,12 +27,24 @@ export class LayoutComponent implements OnInit {
   subscribedFoldersIds = [];
   currentFolder: any = {};
   currentFolderPath = [];
-
+  bookmarks = [];
   constructor(
     private _filesService: FilesService,
     private _authService: AuthService,
-    private _loaderService: LoaderService
+    private _loaderService: LoaderService,
   ) {}
+
+  openBookmark(folder) {
+    this.currentFolderPath = [];
+    if (folder) {
+      this.allFolderComponent.openFolder(folder);
+    } else {
+      this.allFolderComponent.openFolder(this.rootFolder);
+    }
+  }
+  removeBookmark(bookmark) {
+    this._filesService.deleteBookmark(bookmark.id);
+  }
   selectFolderFromPath(folder) {
     this.allFolderComponent.openFolder(folder);
   }
@@ -66,6 +78,37 @@ export class LayoutComponent implements OnInit {
   toggleDirectory() {
     this.showDirectory = !this.showDirectory;
   }
+  fetchFileById(fileId) {
+    const sub: Subscription = this._filesService
+      .getFileById(fileId)
+      .valueChanges()
+      .subscribe(d => {
+        if (this.bookmarks.find(b => b.id === fileId)) {
+          this.bookmarks = this.bookmarks.map(b => (b.id === fileId ? { ...b, ...d } : b));
+        } else {
+          this.bookmarks.push({ ...d, id: fileId, subscription: sub });
+        }
+      });
+  }
+  fetchBookmarks() {
+    this._filesService
+      .getBookmarks()
+      .valueChanges()
+      .subscribe(bookmarks => {
+        Object.keys(bookmarks).map(key => {
+          if (!this.bookmarks.find(b => b.id === key)) {
+            this.fetchFileById(key);
+          }
+        });
+        this.bookmarks = this.bookmarks.filter(b => {
+          if (!Object.keys(bookmarks).find(key => b.id === key)) {
+            b.subscription.unsubscribe();
+            return false;
+          }
+          return true;
+        });
+      });
+  }
   getUser() {
     //    parent: 'ZdQd13dl4qbAKkqLF08y1K9SMLF3'
 
@@ -79,12 +122,13 @@ export class LayoutComponent implements OnInit {
     const interval = setInterval(() => {
       this.currentUser = this._authService.getUserDetails();
       if (this.currentUser) {
+        this.fetchBookmarks();
         clearInterval(interval);
         this.rootFolder = {
           id: this.currentUser.uid,
           name: 'Documents', //this.currentUser.displayName
           type: 'FOLDER',
-          parent: 'ROOT'
+          parent: 'ROOT',
         };
         this._loaderService.hide();
       }

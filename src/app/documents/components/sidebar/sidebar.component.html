@@ -1,24 +1,27 @@
 <div class="wrapper">
   <div class="section-head">
-    <a (click)="open()">My Computer</a>
+    <a (click)="open.emit()">My Computer</a>
   </div>
   <hr>
   <div class="section-body">
-    <a (click)="open()">Home</a>
-    <a (click)="open()">Desktop</a>
-    <a (click)="open()">Music</a>
-    <a (click)="open()">Pictures</a>
-    <a (click)="open()">Videos</a>
-    <a (click)="open()">Downloads</a>
+    <a (click)="open.emit()">Home</a>
+    <a (click)="open.emit()">Desktop</a>
+    <a (click)="open.emit()">Music</a>
+    <a (click)="open.emit()">Pictures</a>
+    <a (click)="open.emit()">Videos</a>
+    <a (click)="open.emit()">Downloads</a>
   </div>
   <hr>
   <div class="section-head">
-    <a (click)="open()">My Bookmarks</a>
+    <a (click)="do()">My Bookmarks</a>
   </div>
   <hr>
   <div class="section-body">
-    <a (click)="open()">Projects</a>
-    <a (click)="open()">Multimedia</a>
-    <a (click)="open()">Personals</a>
+    <div *ngFor="let bookmark of bookmarks" class="bookmark">
+      <a (click)="open.emit(bookmark)">{{bookmark.name}}</a>
+      <a (click)="removeBookmark.emit(bookmark)">
+        <i class="fas fa-times"></i>
+      </a>
+    </div>
   </div>
 </div>

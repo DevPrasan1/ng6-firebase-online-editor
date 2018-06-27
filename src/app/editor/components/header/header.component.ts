@@ -9,6 +9,7 @@ import { aceEditorThemes } from '../../../ace-editor-themes';
 export class HeaderComponent implements OnInit {
   @Output() logout = new EventEmitter<void>();
   @Output() onChangeTheme = new EventEmitter<string>();
+  @Output() navigateTo = new EventEmitter<string>();
   themes = aceEditorThemes;
   theme = 'ace/theme/dracula';
   constructor() {}

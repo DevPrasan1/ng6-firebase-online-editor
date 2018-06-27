@@ -16,14 +16,7 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
   @Input() selectedFile;
   @Output() onSelectFolder = new EventEmitter<any>();
   fileName = '';
-  childern: any = [];
-  showChildern = false;
-  showInput = false;
-  newFileType: string = null;
-  isChildernSubscribed = false;
   loading = false;
-  childernLoading = false;
-  hasRenameSelected = false;
   folders: any = []; // mockData;
   subscribedFoldersIds = [];
   currentFolder: any = {};
@@ -32,16 +25,18 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
     left: '-500px',
     top: '-500px',
   };
+  newFileFolder: any = {};
   constructor(private _router: Router, private _filesService: FilesService) {}
   openFolder(folder) {
     if (folder.type === 'FOLDER') {
       this.currentFolder = folder;
       this.onSelectFolder.emit(folder);
       this.fetchChildern();
+    } else {
+      this.openInEditor(folder);
     }
   }
   openInEditor(folder = this.currentFolder) {
-    console.log(folder);
     this._router.navigateByUrl(`editor/${folder.id}`);
   }
   currentPathFolders() {
@@ -63,105 +58,52 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
     e.stopPropagation();
     e.preventDefault();
   }
-  isFileAlreadyExist(fileName, cb) {
+  isFileAlreadyExist(fileName, type, cb) {
     const sub: Subscription = this._filesService
-      .isFileAlreadyExistWithSameName(this.folder.id, fileName, this.newFileType)
+      .isFileAlreadyExistWithSameName(this.currentFolder.id, fileName, type)
       .valueChanges()
       .subscribe(data => {
         if (data && data.length > 0) {
-          alert(`Same ${this.newFileType.toLowerCase()} already exist`);
+          alert(`Same ${type.toLowerCase()} already exist`);
         } else {
           cb();
         }
         sub.unsubscribe();
       });
   }
-  addNewFileToDb(fileName, form) {
-    this.isFileAlreadyExist(fileName, () => {
-      this.loading = true;
-      this._filesService
-        .addNew({
-          name: fileName,
-          type: this.newFileType,
-          parent: this.folder.id,
-        })
-        .then(() => {
-          this.loading = false;
-          if (!this.showChildern) {
-            this.fetchChildern();
-          }
-        });
-      form.reset();
-      this.showInput = false;
-    });
-  }
-  updateFileName(fileName, form) {
-    this._filesService.updateFileName(this.folder.id, fileName).then(() => {
-      form.reset();
-      this.loading = false;
-      this.showInput = false;
-      this.hasRenameSelected = false;
-      this.newFileType = '';
-    });
-  }
-  onSubmit(form) {
-    let fileName = form.value.fileName.trim();
-    if (this.newFileType === 'FILE') {
-      fileName = fileName.replace(' ', '');
-    } else {
-      fileName = fileName.replace('  ', ' ');
+  addNewFileToDb(fileName) {
+    const { type } = this.newFileFolder;
+    this.newFileFolder = {};
+    if (fileName && fileName.length > 0 && type) {
+      this.isFileAlreadyExist(fileName, type, () => {
+        this.loading = true;
+        this._filesService
+          .addNew({
+            name: fileName,
+            type: type,
+            parent: this.currentFolder.id,
+          })
+          .then(() => {
+            this.loading = false;
+          });
+      });
     }
-    if (fileName) {
-      if (!this.loading) {
-        if (this.hasRenameSelected) {
-          this.updateFileName(fileName, form);
-        } else {
-          this.addNewFileToDb(fileName, form);
-        }
-      }
-    }
-  }
-  toogleInput() {
-    this.showInput = !this.showInput;
-  }
-  hideInput() {
-    this.showInput = false;
-    this.hasRenameSelected = false;
-    this.newFileType = '';
   }
   addFile() {
-    this.newFileType = 'FILE';
-    this.toogleInput();
+    this.newFileFolder = {
+      id: 0,
+      type: 'FILE',
+      name: '',
+    };
   }
   addFolder() {
-    this.newFileType = 'FOLDER';
-    this.toogleInput();
+    this.newFileFolder = {
+      id: 0,
+      type: 'FOLDER',
+      name: '',
+    };
   }
-  renameFile() {
-    this.hasRenameSelected = true;
-    this.fileName = this.folder.name;
-    this.newFileType = this.folder.type;
-    this.toogleInput();
-  }
-  delete() {
-    const txtMsg = `Are you sure to delete "${this.folder.name}"?`;
-    const res = confirm(txtMsg);
-    if (res) {
-      const sub = this._filesService
-        .getFiles(this.folder.id)
-        .snapshotChanges()
-        .subscribe(actions => {
-          this.childernLoading = null;
-          actions.forEach(action => {
-            this._filesService.delete(action.payload.doc.id);
-          });
-          this._filesService.delete(this.folder.id);
-          this.folder = null;
-          this._subscriptions.unsubscribe();
-        });
-      this._subscriptions.add(sub);
-    }
-  }
+
   fetchChildern() {
     const folderId = this.currentFolder.id;
     if (!this.subscribedFoldersIds.find(fId => fId === folderId)) {
@@ -189,7 +131,7 @@ export class AllFoldersComponent implements OnInit, OnDestroy {
                     : f,
               );
             } else if (action.type === 'removed') {
-              this.folder = null;
+              this.folders = this.folders.filter(f => f.id !== action.payload.doc.id);
             }
           });
         });

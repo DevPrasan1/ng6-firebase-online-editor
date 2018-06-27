@@ -1,12 +1,12 @@
 <div class="wrapper">
     <div class="section">
-        <div class="toolbar-menu">File</div>
-        <div class="toolbar-menu">Edit</div>
-        <div class="toolbar-menu">Selection</div>
-        <div class="toolbar-menu">View</div>
-        <div class="toolbar-menu">Go</div>
-        <div class="toolbar-menu">Tasks</div>
-        <div class="toolbar-menu">Help</div>
+        <a (click)="navigateTo.emit('documents')" class="toolbar-menu">File</a>
+        <a class="toolbar-menu">Edit</a>
+        <a class="toolbar-menu">Selection</a>
+        <a class="toolbar-menu">View</a>
+        <a class="toolbar-menu">Go</a>
+        <a class="toolbar-menu">Tasks</a>
+        <a class="toolbar-menu">Help</a>
         <div class="toolbar-menu">
             <select class="theme" name="theme" [(ngModel)]="theme" (change)="changeTheme()">
                 <option *ngFor="let t of themes.dark" value="ace/theme/{{t}}">{{t.replace('_',' ').replace('_' ,' ')}} </option>

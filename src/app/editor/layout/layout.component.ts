@@ -18,6 +18,7 @@ export class LayoutComponent implements OnInit {
   theme = 'ace/theme/dracula';
   constructor(
     private _route: ActivatedRoute,
+    private _router: Router,
     private _filesService: FilesService,
     private _authService: AuthService,
     private _loaderService: LoaderService,
@@ -34,6 +35,9 @@ export class LayoutComponent implements OnInit {
   }
   toggleDirectory() {
     this.showDirectory = !this.showDirectory;
+  }
+  navigateTo(path) {
+    this._router.navigateByUrl(path);
   }
   getUser() {
     const interval = setInterval(() => {
@@ -58,7 +62,7 @@ export class LayoutComponent implements OnInit {
         this._filesService
           .getFileById(folderId)
           .valueChanges()
-          .subscribe(d => {
+          .subscribe((d: any) => {
             this.currentUser = this._authService.getUserDetails();
             this.rootFolder = {
               id: folderId,

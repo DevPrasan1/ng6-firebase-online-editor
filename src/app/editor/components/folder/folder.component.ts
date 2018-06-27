@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FilesService } from '../../../common';
 
@@ -8,9 +8,11 @@ import { FilesService } from '../../../common';
   styleUrls: ['./folder.component.scss'],
 })
 export class FolderComponent implements OnInit, OnDestroy {
-  _subscriptions = new Subscription();
+  private _subscriptions = new Subscription();
+  @ViewChild('textInput') textInput: ElementRef;
   @Input() folder;
   @Input() selectedFile;
+  @Input() paddingLeft = 0;
   @Output() openFile = new EventEmitter<any>();
   fileName = '';
   childern: any = [];
@@ -89,9 +91,15 @@ export class FolderComponent implements OnInit, OnDestroy {
         }
       }
     }
+    this.toogleInput();
   }
   toogleInput() {
     this.showInput = !this.showInput;
+    if (this.showInput) {
+      setTimeout(() => {
+        this.textInput.nativeElement.focus();
+      }, 100);
+    }
   }
   hideInput() {
     this.showInput = false;
@@ -164,7 +172,9 @@ export class FolderComponent implements OnInit, OnDestroy {
     this._subscriptions.add(sub);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.paddingLeft += 10;
+  }
   ngOnDestroy() {
     this._subscriptions.unsubscribe();
   }

@@ -3,6 +3,14 @@
   height: 100%;
   width: 100%;
   margin: 0;
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 3px 0;
+    padding: 0;
+  }
   a {
     text-decoration: none;
     color: white;
@@ -31,6 +39,20 @@
       min-height: 200px;
       a {
         padding-left: 30px;
+      }
+      .bookmark {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        i {
+          visibility: hidden;
+        }
+      }
+      .bookmark:hover {
+        background-color: #165e80;
+        i {
+          visibility: visible;
+        }
       }
     }
     hr {

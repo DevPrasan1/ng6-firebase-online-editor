@@ -1,6 +1,6 @@
 <div class="main" [ngClass]="{'main-full'  : !showDirectory}" *ngIf="currentUser">
   <div class="toolbar">
-    <app-header (logout)="logout()" (onChangeTheme)="changeTheme($event)"></app-header>
+    <app-header (logout)="logout()" (onChangeTheme)="changeTheme($event)" (navigateTo)="navigateTo($event)"></app-header>
   </div>
   <div class="menus">
     <app-icons-side-nav (toggleDirectory)="toggleDirectory()"></app-icons-side-nav>
