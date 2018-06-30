@@ -16,19 +16,19 @@
     border-left: none;
   }
 }
-
 .toolbar {
   grid-row: 1;
   grid-column: 1/4;
   border-bottom: solid var(--border-color) 1px;
 }
-
 .menus {
   grid-row: 2/4;
   grid-column: 1;
   border-right: solid var(--border-color) 1px;
 }
 .explorer {
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.4;
   grid-row: 2;
   grid-column: 2;
@@ -39,6 +39,8 @@
   border-right: solid 1px var(--border-color);
 }
 .files {
+  background-color: var(--bg-color);
+  color: var(--text-color);
   grid-row: 2;
   grid-column: 3;
   height: 19px;

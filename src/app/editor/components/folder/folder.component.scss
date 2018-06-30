@@ -15,10 +15,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: var(--text-color);
     a {
       width: calc(100% - 80px);
       white-space: pre;
-      color: var(--text-color);
       cursor: pointer;
       .blue {
         color: #316cb3;

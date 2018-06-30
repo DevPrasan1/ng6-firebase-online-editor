@@ -21,7 +21,7 @@ export const aceEditorThemes = {
     'tomorrow_night_bright',
     'tomorrow_night_eighties',
     'twilight',
-    'vibrant_ink'
+    'vibrant_ink',
   ],
   light: [
     'chrome',
@@ -38,85 +38,85 @@ export const aceEditorThemes = {
     'xcode',
     'kuroir',
     'katzenmilch',
-    'sqlserver'
-  ]
+    'sqlserver',
+  ],
 };
 
 export const themeVariables = {
   dark: {
-    '--text-color': ' white',
+    '--text-color': 'white',
     '--secondary-bg-color': ' black',
-    '--border-color': ' grey',
-    '--active-bg-color': ' #316cb3',
-    '--active-text-color': ' white',
+    '--border-color': 'grey',
+    '--active-bg-color': '#316cb3',
+    '--active-text-color': 'white',
   },
   light: {
     '--text-color': '#1c2022',
     '--border-color': '#1c2022',
-    '--active-bg-color': '#1c2022',
+    '--active-bg-color': '#316cb3',
     '--active-text-color': 'white',
     '--secondary-bg-color': '#316cb3',
-  }
-}
+  },
+};
 export const mockData = [
   {
     id: 'root',
     name: 'Documents',
     type: 'FOLDER',
-    parent: 'ZdQd13dl4qbAKkqLF08y1K9SMLF3'
+    parent: 'ZdQd13dl4qbAKkqLF08y1K9SMLF3',
   },
   {
     id: 'angular',
     name: 'angular 6',
     type: 'FOLDER',
-    parent: 'root'
+    parent: 'root',
   },
   {
     id: 'react',
     name: 'react',
     type: 'FOLDER',
-    parent: 'root'
+    parent: 'root',
   },
   {
     id: 'data.json',
     name: 'data.json',
     type: 'FILE',
-    parent: 'root'
+    parent: 'root',
   },
   {
     id: '',
     name: '',
     type: 'FOLDER',
-    parent: ''
+    parent: '',
   },
   {
     id: 'src',
     name: 'src',
     type: 'FOLDER',
-    parent: 'angular'
+    parent: 'angular',
   },
   {
     id: 'angular.json',
     name: 'angular.json',
     type: 'FILE',
-    parent: 'angular'
+    parent: 'angular',
   },
   {
     id: 'app',
     name: 'app',
     type: 'FOLDER',
-    parent: 'src'
+    parent: 'src',
   },
   {
     id: 'index.html',
     name: 'index.html',
     type: 'FILE',
-    parent: 'src'
+    parent: 'src',
   },
   {
     id: 'app.component.ts',
     name: 'app.component.ts',
     type: 'FILE',
-    parent: 'app'
-  }
+    parent: 'app',
+  },
 ];

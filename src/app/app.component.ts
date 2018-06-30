@@ -54,7 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (theme === 'dark-theme') {
       setCustomTheme('#1c2022');
     } else {
-      setCustomTheme('#ffffff');
+      setCustomTheme('#eeeeee');
     }
   }
   setTheme(event) {
