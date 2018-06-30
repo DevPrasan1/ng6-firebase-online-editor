@@ -14,6 +14,7 @@ import {
 } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoaderService } from './common';
+import { setCustomTheme } from './common/util';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ import { LoaderService } from './common';
 export class AppComponent implements OnInit, OnDestroy {
   loading = false;
   loadingSub: Subscription;
+  theme = 'dark-theme';
   constructor(private _router: Router, private _loaderService: LoaderService) {
     _router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
@@ -47,7 +49,19 @@ export class AppComponent implements OnInit, OnDestroy {
       this.loading = false;
     }
   }
+  selectTheme(theme) {
+    // this.theme = theme;
+    if (theme === 'dark-theme') {
+      setCustomTheme('#1c2022');
+    } else {
+      setCustomTheme('#ffffff');
+    }
+  }
+  setTheme(event) {
+    setCustomTheme(event.target.value);
+  }
   ngOnInit() {
+    setCustomTheme();
     this.loadingSub = this._loaderService.loaderStatus.subscribe((val: boolean) => {
       this.loading = val;
     });

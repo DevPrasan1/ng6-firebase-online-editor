@@ -1,7 +1,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  background-color: #1c2022;
+  background-color: var(--bg-color);
   height: 100%;
   width: 100%;
   margin: 0;
@@ -14,11 +14,10 @@
   padding: 1px 0px;
   padding-left: 8px;
   font-size: 12px;
-  //background-color: #2b2b2b;
-
-  color: white;
+  color: var(--text-color);
   width: 100%;
   a {
     text-transform: uppercase;
   }
 }
+

@@ -42,6 +42,22 @@ export const aceEditorThemes = {
   ]
 };
 
+export const themeVariables = {
+  dark: {
+    '--text-color': ' white',
+    '--secondary-bg-color': ' black',
+    '--border-color': ' grey',
+    '--active-bg-color': ' #316cb3',
+    '--active-text-color': ' white',
+  },
+  light: {
+    '--text-color': '#1c2022',
+    '--border-color': '#1c2022',
+    '--active-bg-color': '#1c2022',
+    '--active-text-color': 'white',
+    '--secondary-bg-color': '#316cb3',
+  }
+}
 export const mockData = [
   {
     id: 'root',

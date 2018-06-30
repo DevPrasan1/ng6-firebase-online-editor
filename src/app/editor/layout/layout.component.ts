@@ -12,6 +12,7 @@ export class LayoutComponent implements OnInit {
   private _subscriptions = new Subscription();
   rootFolder = null;
   selectedFile = null;
+  allOpenFiles = [];
   loading = true;
   currentUser = null;
   showDirectory = true;
@@ -26,6 +27,13 @@ export class LayoutComponent implements OnInit {
 
   openFile(file) {
     this.selectedFile = file;
+    if (!this.allOpenFiles.find(f => f.id === file.id)) {
+      this.allOpenFiles.push(file);
+    }
+  }
+  closeFile(file) {
+    this.allOpenFiles = this.allOpenFiles.filter(f => f.id !== file.id);
+    this.selectedFile = this.allOpenFiles.length > 0 ? this.allOpenFiles[0] : null;
   }
   logout() {
     this._authService.logout();

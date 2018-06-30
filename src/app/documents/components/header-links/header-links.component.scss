@@ -8,13 +8,12 @@
   padding: 6px 0px;
   padding-right: 10px;
   font-size: 14px;
-  color: white;
+  color: var(--text-color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  // box-shadow: 30px 30px 144px 21px rgba(0, 0, 0, 0.5);
   .section {
-    color: white;
+    color: var(--text-color);
     padding: 1px;
     text-align: center;
     display: flex;
@@ -36,7 +35,7 @@
   font-size: 13px;
   cursor: pointer;
   .theme {
-    color: white;
+    color: var(--text-color);
     width: 83px;
     border: 0px;
     text-transform: capitalize;
@@ -45,7 +44,6 @@
     text-transform: capitalize;
   }
 }
-
 .toolbar-menu:hover {
   transform: scale(1.05, 1.05);
 }

@@ -9,48 +9,7 @@
     flex-wrap: wrap;
     padding: 4px 10px;
     font-size: 14px;
-    color: white;
+    color: var(--text-color);
     justify-content: flex-start; // space-between;
-  }
-
-  /* Popover styling */
-  .popover__wrapper {
-    position: absolute;
-    display: inline-block;
-  }
-  .popover__content {
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(0, 10px);
-    background-color: #bfbfbf;
-    padding: 1rem 0px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    .link {
-      padding: 6px 20px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-    .link:hover {
-      background-color: #165e80;
-      // border-top: solid 1px white;
-      // border-bottom: solid 1px white;
-    }
-  }
-
-  .show {
-    z-index: 10;
-    width: 200px;
-    background-color: black;
-    opacity: 1;
-    visibility: visible;
-    // transform: translate(0, -20px);
-    // transition: all 0.1s cubic-bezier(0.75, -0.02, 0.2, 0.97);
-  }
-  .popover__message {
-    text-align: center;
   }
 }

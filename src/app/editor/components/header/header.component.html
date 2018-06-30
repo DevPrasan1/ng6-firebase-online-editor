@@ -3,21 +3,26 @@
         <a (click)="navigateTo.emit('documents')" class="toolbar-menu">Home</a>
         <a class="toolbar-menu">File</a>
         <a class="toolbar-menu">Edit</a>
-        <a class="toolbar-menu">Selection</a>
+        <!-- <a class="toolbar-menu">Selection</a>
         <a class="toolbar-menu">View</a>
         <a class="toolbar-menu">Go</a>
-        <a class="toolbar-menu">Tasks</a>
-        <a class="toolbar-menu">Help</a>
+        <a class="toolbar-menu">Tasks</a> -->
+        <!-- <a class="toolbar-menu">Help</a> -->
         <div class="toolbar-menu">
             <select class="theme" name="theme" [(ngModel)]="theme" (change)="changeTheme()">
-                <option *ngFor="let t of themes.dark" value="ace/theme/{{t}}">{{t.replace('_',' ').replace('_' ,' ')}} </option>
+                <optgroup label="Dark">
+                    <option *ngFor="let t of themes.dark" value="ace/theme/{{t}}">{{t.replace('_',' ').replace('_' ,' ')}} </option>
+                </optgroup>
+                <optgroup label="Light">
+                    <option *ngFor="let t of themes.light" value="ace/theme/{{t}}">{{t.replace('_',' ').replace('_' ,' ')}} </option>
+                </optgroup>
             </select>
         </div>
     </div>
     <div class="section">
+        {{currentUser?.displayName}}
         <a (click)="signout()">
             <i class="fas fa-power-off"></i>
-            Logout
         </a>
     </div>
 </div>

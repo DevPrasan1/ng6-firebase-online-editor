@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit, OnDestroy, Input } from '@angular/core';
 import { FilesService } from '../../../common';
-
+import { setEditorTheme } from '../../../common/util';
 declare var ace: any;
 const extensions = {
   js: 'javascript',
@@ -23,9 +23,10 @@ export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, On
   constructor(private _filesService: FilesService) {}
 
   ngOnInit() {
-    this.autoSave();
+    //this.autoSave();
   }
   ngAfterViewInit() {
+    setEditorTheme();
     document.getElementById('editor').style.fontSize = '16px';
     this.editor.setShowPrintMargin(false);
     // this.editor.insert(data);
@@ -55,9 +56,9 @@ export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, On
     }
   }
   autoSave() {
-    // this.interval = setInterval(() => {
-    //   this.saveFile();
-    // }, 3000);
+    this.interval = setInterval(() => {
+      this.saveFile();
+    }, 3000);
   }
   showPopUp() {
     this.showPopup = true;
@@ -81,11 +82,13 @@ export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, On
       }
       const data = this.selectedFile && this.selectedFile.content ? this.selectedFile.content : '';
       this.editor.setValue(data);
-      this.editor.gotoLine(1);
+      this.editor.getSession().setUndoManager(new ace.UndoManager());
+      this.editor.gotoLine(2);
     }
     this.editor.setOptions({
       enableBasicAutocompletion: true,
     });
+    this.editor.session.setUseWrapMode(true);
   }
   ngOnDestroy() {
     this.saveFile();

@@ -11,7 +11,6 @@
     padding-left: 8px;
     padding-right: 4px;
     font-size: 12px;
-    //background-color: #2b2b2b;
     color: white;
     display: flex;
     flex-direction: row;
@@ -19,6 +18,7 @@
     a {
       width: calc(100% - 80px);
       white-space: pre;
+      color: var(--text-color);
       cursor: pointer;
       .blue {
         color: #316cb3;
@@ -50,15 +50,16 @@
     min-height: 15px;
     padding-top: 5px;
     padding-left: 25px;
-    color: white;
+    color: var(--text-color);
   }
   .empty {
-    color: white;
+    color: var(--text-color);
     font-size: 10px;
     padding-left: 19px;
   }
   .active {
-    background-color: rgb(0, 84, 153);
+    background-color: var(--active-bg-color);
+    color: var(--active-text-color);
   }
 
   form {
@@ -70,8 +71,8 @@
     span {
       width: 15px;
       text-align: center;
-      background-color: white;
-      color: #242527;
+      background-color: var(--text-color);
+      color: var(--bd-color);
       padding: 0px 3px;
       margin-bottom: 0.5px;
       margin-top: -0.5px;

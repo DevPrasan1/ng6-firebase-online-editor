@@ -1,17 +1,26 @@
 <div class="main" [ngClass]="{'main-full'  : !showDirectory}" *ngIf="currentUser">
   <div class="toolbar">
-    <app-header (logout)="logout()" (onChangeTheme)="changeTheme($event)" (navigateTo)="navigateTo($event)"></app-header>
+    <app-header (logout)="logout()" [currentUser]="currentUser" (onChangeTheme)="changeTheme($event)" (navigateTo)="navigateTo($event)"></app-header>
   </div>
-  <div class="menus">
-    <app-icons-side-nav (toggleDirectory)="toggleDirectory()"></app-icons-side-nav>
+  <div class="explorer">EXPLORER</div>
+  <div class="files">
+    <a *ngFor="let file of allOpenFiles" (click)="openFile(file)" [ngClass]="{ 'active' : file.id===selectedFile.id}">
+      <span>{{file.name}}</span>
+      <span (click)="closeFile(file) ">
+        <i class="fas fa-times "></i>
+      </span>
+    </a>
   </div>
-  <div class="directory">
-    <app-directory-side-nav [rootFolder]="rootFolder" [selectedFile]="selectedFile" (openFile)="openFile($event)"></app-directory-side-nav>
+  <div class="menus ">
+    <app-icons-side-nav (toggleDirectory)="toggleDirectory() "></app-icons-side-nav>
   </div>
-  <div class="editor">
-    <app-text-editor [selectedFile]="selectedFile" [theme]="theme"></app-text-editor>
+  <div class="directory ">
+    <app-directory-side-nav [rootFolder]="rootFolder " [selectedFile]="selectedFile " (openFile)="openFile($event) "></app-directory-side-nav>
   </div>
-  <div class="footer">
-    <app-footer [currentUser]="currentUser"></app-footer>
+  <div class="editor ">
+    <app-text-editor [selectedFile]="selectedFile " [theme]="theme "></app-text-editor>
+  </div>
+  <div class="footer ">
+    <app-footer [currentUser]="currentUser "></app-footer>
   </div>
 </div>

@@ -1,9 +1,47 @@
 body {
   margin: 0;
   font-family: 'sans-serif';
-  background-color: #1c2022;
+}
+#root.light-theme {
+  --text-color: #1c2022;
+  --bg-color: white;
+  --border-color: #1c2022;
+  --active-bg-color: #1c2022;
+  --active-text-color: white;
+  --secondary-bg-color: #316cb3;
 }
 
+#root.dark-theme {
+  --text-color: white;
+  --bg-color: #1c2022;
+  --secondary-bg-color: black;
+  --border-color: grey;
+  --active-bg-color: #316cb3;
+  --active-text-color: white;
+  --font-family: 'sans-serif';
+}
+
+// .ace_content {
+//   background-color: var(--bg-color);
+// }
+// .ace_gutter {
+//   background-color: var(--bg-color) !important;
+// }
+// .ace_completion-highlight {
+//   color: #ff79c6 !important;
+// }
+// .ace_line {
+//   color: var(--text-color) !important;
+// }
+// .ace_line .ace_selected {
+//   background-color: var(--bg-color) !important;
+// }
+// .ace_active-line {
+//   background: var(--bg-color) !important;
+// }
+// .ace_gutter-active-line {
+//   background: var(--bg-color) !important;
+// }
 .b-0 {
   border: 0;
 }
@@ -11,24 +49,36 @@ body {
 .pointer {
   cursor: pointer;
 }
-.ace_content {
-  background-color: #1c2022;
-}
-.ace_gutter {
-  background-color: #1c2022 !important;
-}
-.ace_completion-highlight {
-  color: #ff79c6 !important;
-}
-.ace_line {
-  color: white !important;
-}
-.ace_line .ace_selected {
-  background-color: #24282a !important;
-}
-.ace_active-line {
-  background: #24282a !important;
-}
-.ace_gutter-active-line {
-  background: #24282a !important;
+
+/* Popover styling */
+.popover__wrapper {
+  position: absolute;
+  display: inline-block;
+
+  .popover__content {
+    opacity: 0;
+    visibility: hidden;
+    padding: 1rem 0px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    .link {
+      padding: 6px 20px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .link:hover {
+      background-color: var(--active-bg-color);
+      color: var(--active-text-color);
+    }
+  }
+  .show {
+    z-index: 10;
+    width: 200px;
+    background-color: var(--secondary-bg-color);
+    opacity: 1;
+    visibility: visible;
+  }
 }

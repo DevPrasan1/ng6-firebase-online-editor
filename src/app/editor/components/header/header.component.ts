@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { aceEditorThemes } from '../../../ace-editor-themes';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { aceEditorThemes, setEditorTheme } from '../../../common/util';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +7,7 @@ import { aceEditorThemes } from '../../../ace-editor-themes';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @Input() currentUser;
   @Output() logout = new EventEmitter<void>();
   @Output() onChangeTheme = new EventEmitter<string>();
   @Output() navigateTo = new EventEmitter<string>();
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   }
   changeTheme() {
     this.onChangeTheme.emit(this.theme);
+    setEditorTheme();
   }
   ngOnInit() {}
 }

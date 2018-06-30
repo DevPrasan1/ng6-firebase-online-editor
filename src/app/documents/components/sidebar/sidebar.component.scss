@@ -7,19 +7,20 @@
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--border-color);
     margin: 3px 0;
     padding: 0;
   }
   a {
     text-decoration: none;
-    color: white;
+    color: var(--text-color);
     font-size: 14px;
     padding: 5px 10px;
     cursor: pointer;
   }
   a:hover {
-    background-color: #165e80;
+    background-color: var(--active-bg-color);
+    color: var(--active-text-color);
   }
   .wrapper {
     display: flex;
@@ -49,7 +50,10 @@
         }
       }
       .bookmark:hover {
-        background-color: #316cb3;
+        background-color: var(--active-bg-color);
+        a {
+          color: var(--active-text-color);
+        }
         i {
           visibility: visible;
         }

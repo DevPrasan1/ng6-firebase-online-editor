@@ -1,25 +1,26 @@
 :host {
-  background-color: #1c2022;
+  background-color: var(--bg-color);
   padding: 0;
   height: 100%;
   width: 100%;
   margin: 0;
 }
 .wrapper {
+  height: 20px;
   display: flex;
   flex-direction: row;
   padding: 4px 10px;
   font-size: 14px;
-  color: white;
-  background-color: #1c2022;
+  color: var(--text-color);
+  background-color: var(--bg-color);
   justify-content: space-between;
   .section {
-    color: white;
+    color: var(--text-color);
     padding: 1px;
     text-align: center;
     a {
       cursor: pointer;
-      color: white;
+      color: var(--text-color);
     }
     i {
       padding: 2px 7px;

@@ -8,7 +8,7 @@
   width: 100vh;
   display: table-cell;
   vertical-align: middle;
-  background-color: #1c2022;
+  background-color: var(--bg-color);
 }
 .logo {
   text-align: center;
@@ -19,18 +19,15 @@
   height: 380px;
   margin: 0 auto;
   padding: 0 50px;
-  background-color: #1c2022;
+  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-shadow: 0 0px 24px 9px rgba(71, 160, 229, 0.5);
-  // animation: fire 1s infinite;
 
-  /* Shared */
   .loginBtn {
     box-sizing: border-box;
     position: relative;
-    /* width: 13em;  - apply for fixed size */
     margin: 0.2em;
     margin-top: 20px;
     padding: 0 15px 0 46px;

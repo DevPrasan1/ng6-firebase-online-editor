@@ -20,9 +20,9 @@
     crossorigin="anonymous"></script>
   <script src="https://rawgit.com/ajaxorg/ace-builds/c915483e909bc1b3061cabaaf932f796c723226b/src-noconflict/ext-beautify.js"
     crossorigin="anonymous"></script>
-  <script>
-    ace.require("ace/ext/language_tools");
-  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <style>
     body {
       margin: 0;
@@ -30,10 +30,20 @@
       background-color: #1c2022;
     }
   </style>
+  <script>
+    ace.require("ace/ext/language_tools");
+    const EditSession = require("ace/edit_session").EditSession;
+  </script>
 </head>
 
 <body>
   <app-root></app-root>
+  <script>
+    const bgColor = localStorage.getItem('themeColor');
+    if (bgColor) {
+      document.body.style.backgroundColor = bgColor;
+    }
+  </script>
 </body>
 
 </html>
