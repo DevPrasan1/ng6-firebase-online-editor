@@ -39,7 +39,7 @@
 <div [hidden]="!showInput" class="childern">
   <form class="header grid" #fileForm="ngForm" (ngSubmit)="onSubmit(fileForm)">
     <input type="text" #textInput autocomplete="false" ngModel name="fileName" [(ngModel)]="fileName" (blur)="onSubmit(fileForm)"
-      autofocus/>
+      autofocus [disabled]="loading">
     <span (click)="hideInput()">
       <i class="fas fa-times">
       </i>

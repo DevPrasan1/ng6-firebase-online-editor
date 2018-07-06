@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { aceEditorThemes, setEditorTheme } from '../../../common/util';
+import { aceEditorThemes, setEditorTheme,loadTheme,saveTheme } from '../../../common/util';
 
 @Component({
   selector: 'app-header',
@@ -12,14 +12,17 @@ export class HeaderComponent implements OnInit {
   @Output() onChangeTheme = new EventEmitter<string>();
   @Output() navigateTo = new EventEmitter<string>();
   themes = aceEditorThemes;
-  theme = 'ace/theme/dracula';
+  theme = loadTheme() || 'ace/theme/dracula';
   constructor() {}
   signout() {
     this.logout.emit();
   }
   changeTheme() {
     this.onChangeTheme.emit(this.theme);
+    saveTheme(this.theme);
     setEditorTheme();
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.changeTheme();
+  }
 }

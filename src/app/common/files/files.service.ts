@@ -11,14 +11,6 @@ export class FilesService {
     _afs.firestore.settings({ timestampsInSnapshots: true });
   }
 
-  // getFiles(parent = 'ROOT') {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files', ref => ref.where('parent', '==', parent).orderBy('name', 'asc'));
-  // }
-
   getFiles(parent = 'ROOT') {
     const uid = this._auth.auth.currentUser.uid;
     return this._afs.collection(
@@ -27,30 +19,12 @@ export class FilesService {
       //.orderBy('name', 'asc'),
     );
   }
-  // getFileById(fileId) {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files')
-  //     .doc(fileId);
-  // }
+
   getFileById(fileId) {
     const uid = this._auth.auth.currentUser.uid;
     return this._afs.collection('files', ref => ref.where('owner_id', '==', uid)).doc(fileId);
   }
-  // isFileAlreadyExistWithSameName(parent, fileName, fileType) {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files', ref =>
-  //       ref
-  //         .where('parent', '==', parent)
-  //         .where('name', '==', fileName)
-  //         .where('type', '==', fileType),
-  //     );
-  // }
+
   isFileAlreadyExistWithSameName(parent, fileName, fileType) {
     const uid = this._auth.auth.currentUser.uid;
     return this._afs.collection('files', ref =>
@@ -61,15 +35,7 @@ export class FilesService {
         .where('owner_id', '==', uid),
     );
   }
-  // updateFileName(fileId, fileName) {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files')
-  //     .doc(fileId)
-  //     .update({ name: fileName });
-  // }
+
   updateFileName(fileId, fileName) {
     const uid = this._auth.auth.currentUser.uid;
     return this._afs
@@ -77,17 +43,7 @@ export class FilesService {
       .doc(fileId)
       .update({ name: fileName });
   }
-  // addNew(folder) {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   if (folder.type === 'FILE') {
-  //     folder.content = '';
-  //   }
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files')
-  //     .add(folder);
-  // }
+
   addNew(folder) {
     const uid = this._auth.auth.currentUser.uid;
     if (folder.type === 'FILE') {
@@ -97,40 +53,7 @@ export class FilesService {
     folder.timestamp = new Date();
     return this._afs.collection('files').add(folder);
   }
-  // addFile(parentFolderId, name) {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files')
-  //     .add({
-  //       type: 'FILE',
-  //       parent: parentFolderId,
-  //       name: name,
-  //       content: '',
-  //     });
-  // }
-  // addFolder(parentFolderId, name) {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files')
-  //     .add({
-  //       type: 'FOLDER',
-  //       parent: parentFolderId,
-  //       name: name,
-  //     });
-  // }
-  // updateFile(id, data) {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files')
-  //     .doc(id)
-  //     .update(data);
-  // }
+
   updateFile(id, data) {
     const uid = this._auth.auth.currentUser.uid;
     return this._afs
@@ -138,15 +61,7 @@ export class FilesService {
       .doc(id)
       .update(data);
   }
-  // delete(id) {
-  //   const uid = this._auth.auth.currentUser.uid;
-  //   return this._afs
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('files')
-  //     .doc(id)
-  //     .delete();
-  // }
+
   delete(id) {
     const uid = this._auth.auth.currentUser.uid;
     return this._afs

@@ -7,7 +7,7 @@
             <div class="item item-4"></div>
         </div>
     </div>
-    <div class="theme-select">
+    <div class="theme-select" *ngIf="!loading">
         <a class="light pointer" (click)="selectTheme('light-theme')"></a>
         <a class="dark pointer" (click)="selectTheme('dark-theme')"></a>
         <input class="custom" type="color" (change)="setTheme($event)" />

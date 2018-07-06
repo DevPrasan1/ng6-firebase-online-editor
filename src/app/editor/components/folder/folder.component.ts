@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { FilesService } from '../../../common';
 
 @Component({
@@ -38,6 +39,7 @@ export class FolderComponent implements OnInit, OnDestroy {
     const sub: Subscription = this._filesService
       .isFileAlreadyExistWithSameName(this.folder.id, fileName, this.newFileType)
       .valueChanges()
+      .pipe(first())
       .subscribe(data => {
         if (data && data.length > 0) {
           alert(`Same ${this.newFileType.toLowerCase()} already exist`);
@@ -48,8 +50,8 @@ export class FolderComponent implements OnInit, OnDestroy {
       });
   }
   addNewFileToDb(fileName, form) {
+    this.loading=true;
     this.isFileAlreadyExist(fileName, () => {
-      this.loading = true;
       this._filesService
         .addNew({
           name: fileName,
@@ -60,6 +62,7 @@ export class FolderComponent implements OnInit, OnDestroy {
           this.loading = false;
           if (!this.showChildern) {
             this.fetchChildern();
+            this.showChildern=true;
           }
         });
       form.reset();
@@ -76,22 +79,24 @@ export class FolderComponent implements OnInit, OnDestroy {
     });
   }
   onSubmit(form) {
-    let fileName = form.value.fileName.trim();
-    if (this.newFileType === 'FILE') {
-      fileName = fileName.replace(' ', '');
-    } else {
-      fileName = fileName.replace('  ', ' ');
-    }
-    if (fileName) {
-      if (!this.loading) {
-        if (this.hasRenameSelected) {
-          this.updateFileName(fileName, form);
-        } else {
-          this.addNewFileToDb(fileName, form);
+    if(!this.loading){
+      let fileName = form.value.fileName.trim();
+      if (this.newFileType === 'FILE') {
+        fileName = fileName.replace(' ', '');
+      } else {
+        fileName = fileName.replace('  ', ' ');
+      }
+      if (fileName) {
+        if (!this.loading) {
+          if (this.hasRenameSelected) {
+            this.updateFileName(fileName, form);
+          } else {
+            this.addNewFileToDb(fileName, form);
+          }
         }
       }
+      this.toogleInput();
     }
-    this.toogleInput();
   }
   toogleInput() {
     this.showInput = !this.showInput;
@@ -127,13 +132,13 @@ export class FolderComponent implements OnInit, OnDestroy {
       const sub = this._filesService
         .getFiles(this.folder.id)
         .snapshotChanges()
+        .pipe(first())
         .subscribe(actions => {
           this.childernLoading = null;
           actions.forEach(action => {
             this._filesService.delete(action.payload.doc.id);
           });
           this._filesService.delete(this.folder.id);
-          this.folder = null;
           this._subscriptions.unsubscribe();
         });
       this._subscriptions.add(sub);
@@ -165,7 +170,9 @@ export class FolderComponent implements OnInit, OnDestroy {
                   : f,
             );
           } else if (action.type === 'removed') {
-            this.folder = null;
+            this.childern = this.childern.filter(
+              f => f.id !== action.payload.doc.id
+            );
           }
         });
       });

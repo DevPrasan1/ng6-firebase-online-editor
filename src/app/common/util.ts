@@ -33,6 +33,12 @@ export const setCustomTheme = (bgColor = getColor()) => {
   });
 };
 
+export const loadTheme = () => {
+  return localStorage.getItem('themeName');
+}
+export const saveTheme = (theme) => {
+  localStorage.setItem('themeName', theme);
+}
 const isDarkColor = color => {
   let r,
     b,
