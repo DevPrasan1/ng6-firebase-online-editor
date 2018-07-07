@@ -88,7 +88,7 @@ export class TextEditorComponent implements OnInit, OnChanges, AfterViewInit, On
     this.editor.setOptions({
       enableBasicAutocompletion: true,
     });
-    this.editor.session.setUseWrapMode(true);
+    // this.editor.session.setUseWrapMode(true);
   }
   ngOnDestroy() {
     this.saveFile();
